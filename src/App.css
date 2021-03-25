@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+.border {
+  border-style: groove;
+  margin: 50px 200px;
+}
