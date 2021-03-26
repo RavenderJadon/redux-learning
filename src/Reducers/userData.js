@@ -36,10 +36,34 @@ const userDataReducer = (state = defaultState, action) => {
       };
       state.push(newEntery);
       return state;
-    case "EDIT_NAME":
-      return state;
-    case "EDIT_TODO":
-      return state;
+    case "EDIT_NAME": {
+      const nameChange = action.payload;
+      const ind = nameChange.ind;
+      const newObj = nameChange.change;
+      let newState = [...state];
+      console.log("newState", newState);
+      newState.splice(ind, 1, newObj);
+      console.log("newState", newState);
+
+      return newState;
+    }
+    case "EDIT_TODO": {
+      const indChange = action.payload;
+      const ind = indChange.ind;
+      const newObj = indChange.change;
+      let newState = [...state];
+      console.log("newState", newState);
+      newState.splice(ind, 1, newObj);
+      console.log("newState", newState);
+
+      return newState;
+    }
+    case "DELETE_TODO": {
+      const ind = action.payload;
+      const newState = [...state];
+      newState.splice(ind, 1);
+      return newState;
+    }
     default:
       return state;
   }

@@ -1,7 +1,15 @@
 import "./App.css";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement, login, userData } from "./Action/index";
+import {
+  increment,
+  decrement,
+  login,
+  userData,
+  editName,
+  editTodo,
+  deleteTodo,
+} from "./Action/index";
 
 function App() {
   const counter = useSelector((state) => state.counterReducer);
@@ -20,6 +28,33 @@ function App() {
     e.preventDefault();
     dispatch(userData(firstName));
     setFirstName("");
+  };
+
+  const editNameComponent = (index, dat) => {
+    const obj = {
+      change: {
+        userName: "changed name",
+        lastName: "changed name",
+        todo: "changed name",
+      },
+      ind: index,
+    };
+    dispatch(editName(obj));
+  };
+
+  const editTodoComponent = (index, dat) => {
+    const obj = {
+      change: {
+        userName: "changed name",
+        lastName: "changed name",
+        todo: "changed name",
+      },
+      ind: index,
+    };
+    dispatch(editTodo(obj));
+  };
+  const dispatchTodoDelete = (index, dat) => {
+    dispatch(deleteTodo(index));
   };
 
   return (
@@ -56,9 +91,16 @@ function App() {
             <p>
               {dat.userName} {dat.lastName}
             </p>
-            <button onClick={() => console.log("edit name")}>edit name</button>
+            <button onClick={(e) => editNameComponent(index, dat)}>
+              edit name
+            </button>
             <p>todo: {dat.todo}</p>
-            <button onClick={() => console.log("edit todo")}>edit todo</button>
+            <button onClick={(e) => editTodoComponent(index, dat)}>
+              edit todo
+            </button>
+            <button onClick={(e) => dispatchTodoDelete(index, dat)}>
+              delete todo
+            </button>
           </div>
         );
       })}
